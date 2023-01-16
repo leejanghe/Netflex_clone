@@ -5,6 +5,7 @@ import App from "./App";
 import { theme } from "./theme";
 import { ThemeProvider } from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import { QueryClient, QueryClientProvider } from "react-query";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -37,7 +38,9 @@ footer, header, hgroup, main, menu, nav, section {
     display: none;
 }
 body {
+  color:${(props) => props.theme.white.darker};
   line-height: 1;
+  background-color: black;
 }
 menu, ol, ul {
   list-style: none;
@@ -70,13 +73,17 @@ a {
 }
 `;
 
+const client = new QueryClient();
+
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
+      <QueryClientProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
+      </QueryClientProvider>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")

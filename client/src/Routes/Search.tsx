@@ -70,7 +70,7 @@ function Tv() {
         </Loader>
       ) : (
         <>
-          <Banner />
+          <Banner movie={airingTodayTvData?.results[6]} category="TV 쇼" />
           <SliderWrapper>
             <Slider
               movies={airingTodayTvData?.results}
